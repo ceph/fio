@@ -1,7 +1,9 @@
 #ifndef ARCH_H
 #define ARCH_H
 
+#ifndef __cplusplus
 #include <stdatomic.h>
+#endif
 
 #include "../lib/types.h"
 
@@ -36,6 +38,7 @@ extern unsigned long arch_flags;
 
 #define ARCH_CPU_CLOCK_WRAPS
 
+#ifndef __cplusplus
 #define atomic_add(p, v)					\
 	atomic_fetch_add((_Atomic typeof(*(p)) *)(p), v)
 #define atomic_sub(p, v)					\
@@ -49,6 +52,7 @@ extern unsigned long arch_flags;
 #define atomic_store_release(p, v)				\
 	atomic_store_explicit((_Atomic typeof(*(p)) *)(p), (v),	\
 			      memory_order_release)
+#endif
 
 /* IWYU pragma: begin_exports */
 #if defined(__i386__)
